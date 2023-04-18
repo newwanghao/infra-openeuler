@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/custom-http-errors: 400,500
+    nginx.ingress.kubernetes.io/proxy-body-size: 2m
+  name: ingress
+  namespace: patchwork2
+spec:
+  tls:
+    - hosts:
+        - patchwork2.osinfra.cn
+      secretName: patchwork-tls
+  rules:
+    - host: patchwork2.osinfra.cn
+      http:
+        paths:
+          - backend:
+              serviceName: patchwork2
+              servicePort: 80
+            path: /

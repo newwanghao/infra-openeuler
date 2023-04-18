@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+- ingress.yaml
+- secrets.yaml
+- service.yaml
+- namespace.yaml
+- pvc.yaml
+- cronjob.yaml
+commonAnnotations:
+  kubernetes.ops.cluster: test
+  kubernetes.ops.email: zjm.514@qq.com
+  kubernetes.ops.os.base: ubuntu
+  kubernetes.ops.owner: zhaojiaming
+  kubernetes.ops.region: hk
+namespace: patchwork2
+images:
+- name: swr.cn-north-4.myhuaweicloud.com/opensourceway/patchwork/patchwork
+  newTag: src-op-17ce10a
